@@ -12,26 +12,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result && $result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+if ($result && $result->num_rows === 1) {
+    $user = $result->fetch_assoc();
 
-        // ✅ Verify password (use password_verify when passwords are hashed)
-        if ($password === $user['password']) {
-            // Save session variables
-            $_SESSION['admin_logged_in'] = true;
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
-            $_SESSION['destination_id'] = $user['destination_id'];
+    if (password_verify($password, $user['password'])) {
+        // Save session variables
+        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['destination_id'] = $user['destination_id'];
 
-            // Redirect to dashboard
-            header("Location: admin_dashboard.php");
-            exit;
-        }
+        // Redirect to dashboard
+        header("Location: admin_dashboard.php");
+        exit;
     }
-    else {
-        $error = "Invalid credentials";
-    }
+}
+
+// If username doesn't exist OR password is incorrect
+$error = "Invalid credentials";
     
     $stmt->close();
     $conn->close();

@@ -2,6 +2,11 @@
 include 'db.php';
 session_start();
 
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['role'] !== 'receptionist') {
+    header('Location: admin_login.php');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['visitor_id'] ?? null;
 

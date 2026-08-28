@@ -21,6 +21,16 @@ The system provides role-based access control so that different categories of ad
 - Administrative dashboard
 - Secure password hashing and verification
 
+## Screenshots
+
+### 1. Visitor Check-In Form
+
+![Visitor Check-In Form](screenshots/visitor-checkin.png)
+
+### 2. Check-In Success Confirmation
+
+![Check-In Success Confirmation](screenshots/checkin-success.png)
+
 ## User Roles
 
 The system implements multiple administrative roles:
